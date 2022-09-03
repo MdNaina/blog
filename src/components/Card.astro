@@ -1,0 +1,25 @@
+---
+
+export interface Props {
+    post: Post
+}
+const { post } = Astro.props;
+
+---
+
+<li class="mt-2">
+    <a href={post.url} class="flex p-2 items-center rounded-md gap-4">
+        <img src={post.frontmatter.heroImage} class="w-32" />
+        <div>
+            <h2>{post.frontmatter.title}</h2>
+            <p>{post.frontmatter.description}</p>
+        </div>
+    </a>
+</li>
+
+<style>
+    a {
+        width: 100%;
+        background: rgb(206, 200, 200);
+    }
+</style>

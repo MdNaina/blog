@@ -1,0 +1,37 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
+import myImage from "../assets/2kDeveloper.png"
+import Card from '../components/Card.astro';
+
+// Use Astro.glob() to fetch all posts, and then sort them by date.
+const posts = (await Astro.glob('./blog/*.{md,mdx}')).sort(
+	(a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf()
+) as Post[];
+---
+
+<!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header title={SITE_TITLE} />
+		<main>
+			<img src={myImage} alt="">
+			<h1 class="m-2 text-center font-semibold">Welcome to 2kDeveloper Blog!</h1>
+			<p class="text-center">
+				Welcome to the official 2kDeveloper blog. In this blog we will cover our experience with by blog
+			</p>
+			<div>
+				<h2 class="mt-8 font-semibold">Top Blogs</h2>
+				<ul>
+					{posts.map(post => <Card post={post} />)}
+				</ul>
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>
